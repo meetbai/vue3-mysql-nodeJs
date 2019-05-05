@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "login api",
+  "main": "index.js",
+  "scripts": {
+    "server": "supervisor ./app",
+    "stop": "xl_close_port -p 3000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql": "^2.17.1"
+  }
+}
