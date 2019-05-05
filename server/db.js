@@ -5,6 +5,6 @@ module.exports={
 		user:'root',
 		port:'3306',
 		database:'nodeTest',
-		password:'yang123456'
+		password:'testPwd'
 	}
 }
