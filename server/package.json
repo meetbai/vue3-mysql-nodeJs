@@ -4,7 +4,7 @@
   "description": "login api",
   "main": "index.js",
   "scripts": {
-    "server": "supervisor ./app",
+    "server": "supervisor ./index",
     "stop": "xl_close_port -p 3000"
   },
   "author": "",

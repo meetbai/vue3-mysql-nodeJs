@@ -1,10 +1,11 @@
 var express=require('express');
+var bodyParser = require('body-parser');
 var router=express.Router();
 var mysql=require('mysql');
 var mysqlModel=require('../db');
 
 var pool=mysql.createPool(mysqlModel.mysql);
-router.get('/',function (req,res) {
+router.post('/',function (req,res) {
 	pool.getConnection((err,connection)=>{
 		var sql='select * from login';
 		if(err){

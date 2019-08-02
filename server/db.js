@@ -4,7 +4,7 @@ module.exports={
 		host:'localhost',
 		user:'root',
 		port:'3306',
-		database:'nodeTest',
-		password:'testPwd'
+		database:'Test@123456',
+		password:'testDb'
 	}
 }

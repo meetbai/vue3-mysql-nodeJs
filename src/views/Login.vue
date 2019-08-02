@@ -3,11 +3,11 @@
 		<h2>{{title}}</h2>
 		<div class="name">
 			<label for="userName">用户名:</label>
-			<input type="text" id="userName" name="userName">
+			<input type="text" id="userName" name="userName" v-model="userName">
 		</div>
 		<div class="pwd">
 			<label for="userPwd">密码:</label>
-			<input type="text" id="userPwd" name="userPwd">
+			<input type="text" id="userPwd" name="userPwd" v-model="userPwd">
 		</div>
 		<div class="login" @click="loginFn">
 			登录
@@ -20,17 +20,20 @@
 		name:"login",
 		data(){
 			return {
-				title:"登录页"
+				title:"登录页",
+				userName:"",
+				userPwd:""
+				
 			}
 		},
 		methods:{
 			loginFn(){
-				console.log("登录")
-				this.$http.get("/api/login/").then((res)=>{
-					console.log("res==>",res)
+				let that=this
+				this.$http.post("/api/login",{name:that.userName,password:that.userPwd}).then((res)=>{
+					console.log("res==>2",res)
 					if(res.status==200){
 						var path = {
-							path: '/about'
+							path: '/home'
 						}
 						this.$router.push(path)
 					}
