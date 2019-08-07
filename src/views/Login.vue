@@ -1,9 +1,9 @@
 <template>
-	<div >
+	<div>
 		<h2>{{title}}</h2>
 		<div class="name">
 			<label for="userName">用户名:</label>
-			<input  type="text" id="userName" name="userName" v-model="userName">
+			<input type="text" id="userName" name="userName" v-model="userName">
 		</div>
 		<div class="pwd">
 			<label for="userPwd">密码:</label>
@@ -18,60 +18,88 @@
 			</div>
 		</div>
 		<div>{{result}}</div>
-		
+
 	</div>
 </template>
 
 <script>
 	export default {
-		name:"login",
-		data(){
+		name: "login",
+		data() {
 			return {
-				title:"登录页",
-				userName:"",
-				userPwd:"",
-				result:""
+				title: "登录页",
+				userName: "",
+				userPwd: "",
+				result: ""
 			}
 		},
-		methods:{
-			loginFn(){
-				let that=this
-				this.$http.post("/api/login",{'userName':that.userName,'passWord':that.userPwd}).then((res)=>{
-					console.log("res==>2",res)
-						this.result=res.body.msg
-						// var path = {
-						// 	path: '/home'
-						// }
-						// this.$router.push(path)
-				},(err)=>{
-					this.result=err.body.msg
+		methods: {
+			loginFn() {
+				let that = this
+				this.$http.post("/api/login", {
+					'act': 'login',
+					'userName': that.userName,
+					'passWord': that.userPwd
+				}).then((res) => {
+					this.result = res.body.msg
+					let body = res.body
+					if (body.success) {
+						var path = {
+							path: '/home',
+							query: {
+								userName: that.userName
+							}
+						}
+						this.$router.push(path)
+					}
+				}, (err) => {
+					this.result = err.body.msg
+					this.$message(err.body.msg);
+
 				})
 			},
-			register(){
-				
+			register() {
+				let that = this
+				this.$http.post("/api/login", {
+					'act': 'res',
+					'userName': that.userName,
+					'passWord': that.userPwd
+				}).then((res) => {
+					this.result = res.body.msg
+					let body = res.body
+					 this.$message(body.msg);
+				}, (err) => {
+					this.result = err.body.msg
+					this.$message(body.msg);
+
+				})
 			}
 		}
 	}
-	
 </script>
 
 <style>
-	label{
+	label {
 		display: inline-block;
 		min-width: 60px;
 		text-align: right;
 		margin-right: 10px;
 	}
-	.btns{
+
+	.btns {
 		overflow: hidden;
 	}
-	.pwd{
+
+	.pwd {
 		margin-top: 14px;
 		margin-bottom: 14px;
 	}
-	.register ,.login{
+
+	.register,
+	.login {
 		float: left;
 	}
+
 	.register {
 		margin-left: 30px;
 	}
