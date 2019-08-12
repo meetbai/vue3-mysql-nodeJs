@@ -5,7 +5,7 @@
 			<label for="">请上传头像:</label>
 			<input @change="photo($event)" type="file" id="upload_img">
 		</div>
-		<img :src="imgUrl" alt="">
+		<img style="width:100px;" :src="imgUrl" alt="">
 	</div>
 
 
@@ -18,13 +18,13 @@
 			return {
 				pageName: 'infoAdd',
 				portr: '',
-				imgUrl:''
+				imgUrl: ''
 			}
 		},
 		methods: {
 			photo(e) {
 				let file = e.target.files[0]
-				let type=file.type.split("/")[0]
+				let type = file.type.split("/")[0]
 				let param = new FormData()
 				param.append('file', file, file.name)
 				param.append('type', '1')
@@ -38,7 +38,7 @@
 				if (type == "image") {
 					this.$http.post('/api/upload', param, config).then((res) => {
 						console.log(res)
-						this.imgUrl=res.body.imageUrl
+						this.imgUrl = res.body.imageUrl
 					}, (err) => {
 						console.log(err)
 					})

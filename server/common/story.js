@@ -1,6 +1,6 @@
 var qiniu = require('qiniu')
-var config=require('../config/config')
-var uuid=require('uuid')
+var config = require('../config/config')
+var uuid = require('uuid')
 
 // qiniu.conf.ACCESS_KEY = config.qiniu.AK;
 // qiniu.conf.SECRET_KEY = config.qiniu.SK;
@@ -26,13 +26,15 @@ var bucket = 'storagesave';
 
 
 
- function signature () {
+function signature() {
 	// var body=this.request.body
 	// var cloud=body.cloud
 	var key = uuid.v4() + '.jpeg'
-	var putPolicy = new qiniu.rs.PutPolicy({scope:bucket});
-	var token=putPolicy.uploadToken(mac)
-	
+	var putPolicy = new qiniu.rs.PutPolicy({
+		scope: bucket
+	});
+	var token = putPolicy.uploadToken(mac)
+
 	if (token) {
 		// callBack({
 		// 	key: key,
@@ -44,8 +46,8 @@ var bucket = 'storagesave';
 			uptoken: token,
 			domain: config.qiniu.Domain
 		}
-	}else{
+	} else {
 		return {}
 	}
 }
-module.exports=signature
+module.exports = signature
