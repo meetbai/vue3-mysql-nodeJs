@@ -2,6 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
+import Welcome from './views/Welcome.vue'
+// info
+import InfoAdd from './views/info/InfoAdd.vue'
+import InfoList from './views/info/InfoList.vue'
+import InfoEdit from './views/info/InfoEdit.vue'
 
 Vue.use(Router)
 
@@ -15,8 +20,29 @@ export default new Router({
 		},
 		{
 			path: '/home',
-			name: 'home',
-			component: Home
+			component: Home,
+			children:[
+				{
+					path:'/',
+					name:'welcome',
+					component:Welcome
+				},
+				{
+					path:'/infoAdd',
+					naem:'infoAdd',
+					component:InfoAdd
+				},
+				{
+					path:'/infoList',
+					naem:'infoList',
+					component:InfoList
+				},
+				{
+					path:'/infoEdit',
+					naem:'infoEdit',
+					component:InfoEdit
+				}
+			]
 		},
 		{
 			path: '/about',
