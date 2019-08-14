@@ -8,6 +8,7 @@ export default new Vuex.Store({
 		userName: ''
 	},
 	mutations: {
+		// 通过commit 提交状态变化 
 		userLogin(state, payload) {
 			state.userName = payload.userName
 		}
