@@ -1,6 +1,9 @@
 <template>
 	<div>
-
+		<div>
+			<label for="">景区名称:</label>
+			<input v-modle="name" type="text" >
+		</div>
 		<div>
 			<label for="">请上传景区:</label>
 			<input @change="photo($event)" type="file" id="upload_img">
@@ -25,7 +28,9 @@
 				imgUrl: '',
 				intro: '',
 				file: null,
-				userName:'meet'
+				userName: '',
+				name:''
+				
 			}
 		},
 		methods: {
@@ -56,11 +61,14 @@
 			submit() {
 				let file = this.file
 				let intro = this.intro
-				let userName=this.userName
+				let userName = this.userName
+				let name = this.name
 				if (!file) {
 					alert("请上传图片")
 				} else if (!intro) {
 					alert("请上传简介")
+				}else if (!name) {
+					alert("请上传名称")
 				} else {
 					let param = new FormData()
 					param.append('file', file, file.name)

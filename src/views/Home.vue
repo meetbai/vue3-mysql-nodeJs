@@ -21,7 +21,7 @@
 							<!-- <template slot="title">分组一</template> -->
 							<el-menu-item index="1-1"> <router-link to="/infoList">信息列表</router-link></el-menu-item>
 							<el-menu-item index="1-2"> <router-link to="/infoAdd">信息添加</router-link></el-menu-item>
-							<el-menu-item index="1-3"> <router-link to="/infoEdit">信息编辑</router-link></el-menu-item>
+							<!-- <el-menu-item index="1-3"> <router-link to="/infoEdit">信息编辑</router-link></el-menu-item> -->
 						</el-menu-item-group>
 						
 					</el-submenu>
