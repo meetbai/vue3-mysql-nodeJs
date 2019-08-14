@@ -2,12 +2,12 @@
 	<div>
 		<h2>{{title}}</h2>
 		<div class="name">
-			<label for="userName">用户名:</label>
-			<input type="text" id="userName" name="userName" v-model="userName">
+			<label for="userName1">用户名:</label>
+			<input type="text" id="userName1" name="userName1" key="userName1" v-model="userName1">
 		</div>
 		<div class="pwd">
 			<label for="userPwd">密码:</label>
-			<input type="text" id="userPwd" name="userPwd" v-model="userPwd">
+			<input type="text" id="userPwd" name="userPwd" key="userPwd" v-model="userPwd">
 		</div>
 		<div class="btns">
 			<div class="login" @click="loginFn">
@@ -23,27 +23,33 @@
 </template>
 
 <script>
+	import { mapState } from 'vuex'
 	export default {
 		name: "login",
 		data() {
 			return {
 				title: "登录页",
-				userName: "",
+				// userName: "",
 				userPwd: "",
-				result: ""
+				result: "",
+				userName1:''
 			}
+		},
+		computed:{
+			...mapState(['userName'])
 		},
 		methods: {
 			loginFn() {
 				let that = this
 				this.$http.post("/api/login", {
 					'act': 'login',
-					'userName': that.userName,
+					'userName': that.userName1,
 					'passWord': that.userPwd
 				}).then((res) => {
 					this.result = res.body.msg
 					let body = res.body
 					if (body.success) {
+						this.$store.commit({type:'userLogin',userName:body.userName})
 						var path = {
 							path: '/home',
 							query: {
@@ -62,10 +68,11 @@
 				let that = this
 				this.$http.post("/api/login", {
 					'act': 'res',
-					'userName': that.userName,
+					'userName': that.userName1,
 					'passWord': that.userPwd
 				}).then((res) => {
 					this.result = res.body.msg
+					this.$store.commit({type:'userLogin',userName:res.body.userName})
 					let body = res.body
 					 this.$message(body.msg);
 				}, (err) => {

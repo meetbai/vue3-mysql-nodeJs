@@ -19,6 +19,7 @@
 </template>
 
 <script>
+	import { mapState } from 'vuex'
 	export default {
 		name: 'infoAdd',
 		data() {
@@ -28,10 +29,13 @@
 				imgUrl: '',
 				intro: '',
 				file: null,
-				userName: '',
+				// userName: '',
 				name:''
 				
 			}
+		},
+		computed:{
+			...mapState(['userName'])
 		},
 		methods: {
 			photo(e) {

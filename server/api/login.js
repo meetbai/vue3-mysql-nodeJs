@@ -17,7 +17,7 @@ router.post('/',function (req,res) {
 	let sqlStr=''
 	
 	if(act=="login"){//登录
-		sqlStr=`SELECT * FROM user_table WHERE userName="${req.body.userName}"`;
+		sqlStr=`SELECT * FROM user_table WHERE userName="${userName}"`;
 		sql.sql(sqlStr,(err,data)=>{
 			console.log(err,data)
 			if(err){
@@ -29,7 +29,7 @@ router.post('/',function (req,res) {
 				}else if(passWord!=data[0].passWord){
 					res.status(404).send({success:false,code:0,msg:"登录密码错误"})
 				}else{
-					res.json({success:true,code:1,msg:'登录成功'})
+					res.json({success:true,code:1,msg:'登录成功',userName:userName})
 				}
 			}
 			
@@ -40,7 +40,7 @@ router.post('/',function (req,res) {
 			if(err){
 				res.status(404).send({success:false,code:0,msg:"注册失败"}).end()
 			}else{
-				res.status(200).send({success:true,code:0,msg:"注册成功"}).end()
+				res.status(200).send({success:true,code:0,userName:userName,msg:"注册成功"}).end()
 			}
 		})
 	}

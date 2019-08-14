@@ -81,7 +81,7 @@
 <script>
 	// @ is an alias to /src
 	import HelloWorld from '@/components/HelloWorld.vue'
-
+	import { mapState } from 'vuex'
 	export default {
 		name: 'home',
 		data() {
@@ -92,18 +92,21 @@
 			};
 			return {
 				styleObject: {},
-				userName: '',
+				// userName: '',
 				tableData: Array(20).fill(item)
 			}
 		},
+		computed:{
+			...mapState(['userName'])
+		},
+		
 		created() {
-			console.log(this.$route)
 			let mainHeight = document.documentElement.clientHeight - 120 + "px";
 			// console.log(document.documentElement.clientWidth);
 			// console.log(document.documentElement.clientHeight);
 
 			this.styleObject = {height: mainHeight}
-			this.userName = this.$route.query.userName
+			// this.userName = this.$route.query.userName
 		},
 
 		components: {

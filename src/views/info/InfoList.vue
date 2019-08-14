@@ -21,19 +21,23 @@
 	</div>
 </template>
 <script>
+	import { mapState } from 'vuex'
 	export default {
 		name: 'infoList',
 		data() {
 			return {
 				pageName: 'infoList',
-				userName: '',
+				// userName: '',
 				imgUrl: '',
 				intro: '',
 				info: ''
 			}
 		},
+		computed:{
+			...mapState(['userName'])
+		},
 		created() {
-			this.userName = this.$route.query.userName
+			// this.userName = this.$route.query.userName
 			let options = {
 				userName: this.userName,
 				type:"list"
